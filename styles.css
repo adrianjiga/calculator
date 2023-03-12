@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 
 .calculator {
-    padding: 10px;
+    padding: 20px;
     border-radius: 1em;
-    height: 380px;
-    width: 400px;
+    height: 400px;
+    width: 45%;
     margin: auto;
     background-color: #191b28;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
@@ -22,17 +22,23 @@
 }
 
 #btn {
-    background-color: #fb0066;
+    background-color: #00f821;
+    color: black;
+    font-size: medium;
+}
+
+.clear-values {
+    padding-left: 10px;
 }
 
 input[type="button"] {
-    font-family: "Orbitron", sans-serif;
+    font-family: "Source Code Pro", sans-serif;
     background-color: #64278f;
     color: white;
-    border: solid black 0.5px;
+    border: groove rgb(255, 255, 255) 3px;
     width: 100%;
-    border-radius: 5px;
-    height: 70%;
+    border-radius: 10px;
+    height: 100%;
     outline: none;
 }
 

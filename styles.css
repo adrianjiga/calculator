@@ -5,6 +5,7 @@ h1 {
 }
 
 .calculator {
+    font-family: "Source Code Pro", sans-serif;
     padding: 20px;
     border-radius: 1em;
     height: 400px;
@@ -16,8 +17,9 @@ h1 {
 }
 
 .display-box {
-    font-family: "Orbitron", sans-serif;
+    font-size: 20px;
     background-color: #dcdbe1;
+    padding-left: 10px;
     border: solid black 0.5px;
     color: black;
     border-radius: 5px;
@@ -26,24 +28,35 @@ h1 {
 }
 
 #btn {
-    background-color: #00f821;
+    font-size: 20px;
+    padding: 5px;
+    background-color: #10f52e;
     color: black;
     font-size: medium;
 }
 
+#btn:hover {
+    background-color: #08d423;
+}
+
 .clear-values {
-    padding-left: 10px;
+    padding-left: 25px;
 }
 
 input[type="button"] {
-    font-family: "Source Code Pro", sans-serif;
-    background-color: #64278f;
+    padding: 5px;
+    font-size: 20px;
+    background-color: #762daa;
     color: white;
     border: groove rgb(255, 255, 255) 3px;
     width: 100%;
     border-radius: 10px;
     height: 100%;
     outline: none;
+}
+
+input[type="button"]:hover {
+    background-color: #64278f;
 }
 
 input:active[type="button"] {

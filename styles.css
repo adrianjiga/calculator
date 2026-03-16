@@ -1,65 +1,221 @@
-h1 {
-    text-align: center;
+/* ============================================================
+   CSS Custom Properties
+   ============================================================ */
+:root {
+  --color-bg: #191b28;
+  --color-surface: #23263a;
+  --color-display-bg: #dcdbe1;
+  --color-display-text: #111;
+  --color-btn: #762daa;
+  --color-btn-hover: #64278f;
+  --color-btn-active: #e5e5e5;
+  --color-btn-active-text: #111;
+  --color-operator: #5a2280;
+  --color-operator-hover: #4a1a6d;
+  --color-accent: #10f52e;
+  --color-accent-hover: #08d423;
+  --color-accent-text: #111;
+  --color-error: #ff4d4d;
+  --color-error-text: #fff;
+  --color-focus-ring: #a855f7;
+
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 1em;
+
+  --gap: 8px;
+  --padding: 16px;
+
+  --font-calc: 'Source Code Pro', 'Courier New', monospace;
+  --font-size-btn: clamp(14px, 2.5vw, 20px);
+  --font-size-display: clamp(18px, 3vw, 24px);
 }
 
+/* Light mode override */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #f0f0f5;
+    --color-surface: #ffffff;
+    --color-display-bg: #ffffff;
+    --color-display-text: #111;
+    --color-btn: #7c3aed;
+    --color-btn-hover: #6d28d9;
+    --color-btn-active: #c4b5fd;
+    --color-btn-active-text: #111;
+    --color-operator: #5b21b6;
+    --color-operator-hover: #4c1d95;
+  }
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  font-family: var(--font-calc);
+}
+
+/* ============================================================
+   Accessibility utility
+   ============================================================ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   Calculator container
+   ============================================================ */
 .calculator {
-    font-family: "Source Code Pro", sans-serif;
-    padding: 20px;
-    border-radius: 1em;
-    height: 400px;
-    width: 45%;
-    margin: auto;
-    background-color: #191b28;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-        rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  background-color: var(--color-surface);
+  padding: var(--padding);
+  border-radius: var(--radius-lg);
+  width: min(90vw, 380px);
+  box-shadow:
+    rgba(0, 0, 0, 0.19) 0px 10px 20px,
+    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
 }
 
+.calculator__title {
+  text-align: center;
+  color: var(--color-display-bg);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================
+   Display
+   ============================================================ */
 .display-box {
-    font-size: 20px;
-    background-color: #dcdbe1;
-    padding-left: 10px;
-    border: solid black 0.5px;
-    color: black;
-    border-radius: 5px;
-    width: 100%;
-    height: 65%;
+  font-family: var(--font-calc);
+  font-size: var(--font-size-display);
+  background-color: var(--color-display-bg);
+  color: var(--color-display-text);
+  padding: 10px 12px;
+  border: 1px solid #999;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  text-align: right;
+  cursor: default;
 }
 
-#btn {
-    font-size: 20px;
-    padding: 5px;
-    background-color: #10f52e;
-    color: black;
-    font-size: medium;
+.display-box::placeholder {
+  color: #aaa;
 }
 
-#btn:hover {
-    background-color: #08d423;
+.display-box.display--error {
+  background-color: var(--color-error);
+  color: var(--color-error-text);
+  border-color: #c00;
 }
 
-.clear-values {
-    padding-left: 25px;
+/* ============================================================
+   Button grid
+   ============================================================ */
+.calculator__buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
 }
 
-input[type="button"] {
-    padding: 5px;
-    font-size: 20px;
-    background-color: #762daa;
-    color: white;
-    border: groove rgb(255, 255, 255) 3px;
-    width: 100%;
-    border-radius: 10px;
-    height: 100%;
-    outline: none;
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  font-family: var(--font-calc);
+  font-size: var(--font-size-btn);
+  padding: 14px 5px;
+  background-color: var(--color-btn);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  width: 100%;
+  transition:
+    background-color 0.1s ease,
+    transform 0.08s ease;
+  outline: none;
 }
 
-input[type="button"]:hover {
-    background-color: #64278f;
+.btn:hover {
+  background-color: var(--color-btn-hover);
 }
 
-input:active[type="button"] {
-    background: #e5e5e5;
-    -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
-    -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
-    box-shadow: inset 0px 0px 5px #c1c1c1;
+.btn:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  background-color: var(--color-btn-active);
+  color: var(--color-btn-active-text);
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Operator buttons */
+.btn--operator {
+  background-color: var(--color-operator);
+}
+
+.btn--operator:hover {
+  background-color: var(--color-operator-hover);
+}
+
+/* Clear / accent buttons */
+.btn--clear,
+.btn--equals {
+  background-color: var(--color-accent);
+  color: var(--color-accent-text);
+  font-weight: 700;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn--clear:hover,
+.btn--equals:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* Utility buttons (backspace, %) */
+.btn--util {
+  background-color: var(--color-surface);
+  color: var(--color-display-bg);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn--util:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Zero button spans 2 columns */
+.btn--zero {
+  grid-column: span 2;
 }
